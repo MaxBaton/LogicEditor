@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:background="@color/black">
+
+    <com.example.logiceditor.sketcher.Sketcher
+        android:id="@+id/sketcherView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="Sketcher"
+        android:layout_marginStart="150dp"
+        app:layout_constraintStart_toStartOf="@id/recyclerViewElements"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewAction"
+       />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewElements"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sketcherView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/logic_element"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:orientation="horizontal"
+        android:background="@color/action_main_recycler_view_color"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recyclerViewElements"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/action_element"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
