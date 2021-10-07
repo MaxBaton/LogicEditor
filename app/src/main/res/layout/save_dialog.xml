@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:text="@string/circuit_name"
         android:textSize="15sp"
@@ -28,6 +28,6 @@
         android:inputType="textPersonName"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/textViewNameSaveCircuit"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/textViewNameSaveCircuit"
+        app:layout_constraintBottom_toBottomOf="@id/textViewNameSaveCircuit"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
