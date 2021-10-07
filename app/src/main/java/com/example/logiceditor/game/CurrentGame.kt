@@ -15,14 +15,14 @@ class CurrentGame {
     var usedTools = mutableListOf<Tool?>()
     var savedWire = mutableListOf<Wire>()
     val paint = Paint()
-    var currentTool: Tool? = null
-    var currentWire: Wire? = null
+    private var currentTool: Tool? = null
+    private var currentWire: Wire? = null
     private var isToolSelected = false
     private var isWireSelected = false
     private lateinit var firstToolCountWire: Pair<Tool, Int>
     var isSimulate = false
     var isDelete = false
-    var isInversion = false
+    private var isInversion = false
     var sketcherRightBottom: Pair<Float, Float>? = null
 
 
@@ -33,7 +33,7 @@ class CurrentGame {
         }
     }
 
-    fun drawTools(canvas: Canvas?) {
+    private fun drawTools(canvas: Canvas?) {
         var deleteIndex = -1
         usedTools.forEachIndexed { index, it ->
             if (it == currentTool && isDelete) {
@@ -55,7 +55,7 @@ class CurrentGame {
         }
     }
 
-    fun drawWires(canvas: Canvas?) {
+    private fun drawWires(canvas: Canvas?) {
         if (savedWire.size > 0) {
             var deleteIndex = -1
 
@@ -526,8 +526,8 @@ class CurrentGame {
         val list = mutableSetOf<Tool>() as LinkedHashSet<Tool>
 
         savedWire.forEach {
-            if ((it.tools!!.second.first == tool) || (it.tools!!.first.first == tool)) {
-                val pairTool = if (it.tools!!.second.first == tool) it.tools!!.first.first else it.tools!!.second.first
+            if ((it.tools.second.first == tool) || (it.tools.first.first == tool)) {
+                val pairTool = if (it.tools.second.first == tool) it.tools.first.first else it.tools.second.first
                 list.add(pairTool)
             }
         }
@@ -538,7 +538,7 @@ class CurrentGame {
     private fun getToolWires(tool: Tool): List<Wire> {
         val list = mutableListOf<Wire>()
         savedWire.forEach {
-            if (it.tools!!.first.first == tool || it.tools!!.second.first == tool) list.add(it)
+            if (it.tools.first.first == tool || it.tools.second.first == tool) list.add(it)
         }
         return list
     }

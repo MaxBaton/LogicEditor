@@ -1,13 +1,8 @@
 package com.example.logiceditor.activity
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Rect
 import android.view.View
-import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.abs
 
 class RecyclerViewCircuitItemDecoration(private val spaceInPixel: Int): RecyclerView.ItemDecoration() {
     override fun getItemOffsets(

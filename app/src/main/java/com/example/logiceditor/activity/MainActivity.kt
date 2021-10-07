@@ -373,26 +373,19 @@ class MainActivity : AppCompatActivity(){
 
     private fun renameFile(fileName: String) {
         val dir = applicationContext.filesDir.absolutePath
-        val sourcefile = File(dir,fileName)
+        val sourceFile = File(dir,fileName)
 
         val name = fileName.substringBefore("_DATE_")
         val date = CurrentDate.getCurrentDate()//getCurrentDate()
         val newFileName = "${name}_DATE_${date}"
 
-        val destfile= File(dir,newFileName)
-        sourcefile.renameTo(destfile)
-    }
-
-    private fun getCurrentDate(): String {
-        val currentDateTime = Calendar.getInstance().time
-        val formater = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
-        val date = formater.format(currentDateTime)
-        return date
+        val destFile= File(dir,newFileName)
+        sourceFile.renameTo(destFile)
     }
 
     private fun getNamesCircuit() = applicationContext.filesDir.list()
 
-    fun loadCircuit(fileName: String) {
+    private fun loadCircuit(fileName: String) {
         // load circuit
         val fis = applicationContext.openFileInput(fileName)
         val inputStream = ObjectInputStream(fis)

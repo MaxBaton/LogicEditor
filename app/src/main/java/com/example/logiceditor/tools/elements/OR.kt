@@ -9,7 +9,7 @@ class OR(override var image: Int, override var coordinates: Pair<Float, Float> =
     @Transient private var inputX: Rect? = null
     @Transient private  var inputY: Rect? = null
     @Transient private var output: Rect? = null
-    var isInversion = false
+    private var isInversion = false
 
     init {
         ioBoxes = arrayOfNulls(3)

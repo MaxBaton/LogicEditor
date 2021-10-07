@@ -1,8 +1,6 @@
 package com.example.logiceditor.sketcher
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -102,19 +100,19 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         inversionEnabled = true
     }
 
-    fun disableDrawing() {
+    private fun disableDrawing() {
         drawingEnabled = false
     }
 
-    fun disableWiring() {
+    private fun disableWiring() {
         wiringEnabled = false
     }
 
-    fun disableDeleting() {
+    private fun disableDeleting() {
         deleteEnabled = false
     }
 
-    fun disableInversion() {
+    private fun disableInversion() {
         inversionEnabled = false
     }
 }

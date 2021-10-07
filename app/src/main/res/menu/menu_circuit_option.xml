@@ -3,9 +3,9 @@
 
     <item
         android:id="@+id/circuitElementRename"
-        android:title="Переименовать" />
+        android:title="@string/menu_rename" />
 
     <item
         android:id="@+id/circuitElementDelete"
-        android:title="Удалить" />
+        android:title="@string/menu_delete" />
 </menu>

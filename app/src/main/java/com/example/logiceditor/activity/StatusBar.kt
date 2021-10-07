@@ -10,6 +10,6 @@ object StatusBar {
         val window = activity.window
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.setStatusBarColor(ContextCompat.getColor(activity, R.color.background_circuit_color_round))
+        window.statusBarColor = ContextCompat.getColor(activity, R.color.background_circuit_color_round)
     }
 }

@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/layout/action_element.xml" value="0.20052083333333334" />
+        <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/layout/circuit_element.xml" value="0.20052083333333334" />
+        <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/layout/logic_element.xml" value="0.20052083333333334" />
+        <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/layout/save_dialog.xml" value="0.20052083333333334" />
+        <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/menu/menu_circuit_option.xml" value="0.20052083333333334" />
+        <entry key="..\:/Android_Studio/Programms/LogicEditor/app/src/main/res/menu/menu_welcome_activity.xml" value="0.20052083333333334" />
       </map>
     </option>
   </component>

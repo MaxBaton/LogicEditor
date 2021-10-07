@@ -7,13 +7,11 @@ import android.os.Build
 import android.text.Layout
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import com.example.logiceditor.R
 import java.io.File
 
@@ -128,7 +126,7 @@ fun AppCompatActivity.createReferenceWelcomeActivityAlertDialog() =
 fun Context.createPopupMenu(menuResource: Int, anchor: View): PopupMenu {
     val popupMenu = PopupMenu(this,anchor)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        popupMenu.gravity = Gravity.RIGHT
+        popupMenu.gravity = Gravity.END
     }
     popupMenu.menuInflater.inflate(menuResource,popupMenu.menu)
     return popupMenu
