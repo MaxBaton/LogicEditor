@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity(){
         }
 
         arrayIsClickActionItem.forEachIndexed { index, value ->
-            if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) || index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)) ||
+            if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) || index ==
+                        (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)) ||
                             index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion))) && value) {
                 if (arrayIsClickActionItem[index]) {
                     val actionItem = groupAdapterAction.getItem(index) as ActionItem
@@ -159,9 +160,9 @@ class MainActivity : AppCompatActivity(){
         when(action.icon) {
             R.drawable.wire -> {
                 val indexWire = ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)
-                val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else
-                                                                                                getString(R.string.str_out)
-                if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else binding.sketcherView.enableDrawing()
+                val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else getString(R.string.str_out)
+                if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else
+                                                                                    binding.sketcherView.enableDrawing()
                 Toast.makeText(this, "Соединение - ${inOut}", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -184,7 +185,8 @@ class MainActivity : AppCompatActivity(){
                     }else {
                         val indexWire = ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)
                         binding.sketcherView.game.isSimulate = false
-                        if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else binding.sketcherView.enableDrawing()
+                        if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else
+                                                                    binding.sketcherView.enableDrawing()
                     }
                     true
                 }
@@ -210,14 +212,16 @@ class MainActivity : AppCompatActivity(){
             }
             R.drawable.exit -> {
                 if (toolWireCount.first == -1) {
-                    toolWireCount = binding.sketcherView.game.usedTools.size to binding.sketcherView.game.savedWire.size
+                    toolWireCount = binding.sketcherView.game.usedTools.size to
+                                                                binding.sketcherView.game.savedWire.size
                     if (toolWireCount.first != 0) {
                         createNotSaveCircuitAlertDialog(this).show()
                     }else {
                         this.finishAndRemoveTask()
                     }
                 }else {
-                    val currToolWireCount = binding.sketcherView.game.usedTools.size to binding.sketcherView.game.savedWire.size
+                    val currToolWireCount = binding.sketcherView.game.usedTools.size to
+                                                                binding.sketcherView.game.savedWire.size
                     if (toolWireCount != currToolWireCount) {
                         createNotSaveCircuitAlertDialog(this).show()
                     }else {
@@ -229,7 +233,8 @@ class MainActivity : AppCompatActivity(){
             R.drawable.inversion -> {
                 val indexInversion = ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)
                 val inOut = if (arrayIsClickActionItem[indexInversion]) getString(R.string.str_in) else getString(R.string.str_out)
-                if (arrayIsClickActionItem[indexInversion]) binding.sketcherView.enableInversion() else binding.sketcherView.enableDrawing()
+                if (arrayIsClickActionItem[indexInversion]) binding.sketcherView.enableInversion() else
+                                                                            binding.sketcherView.enableDrawing()
                 Toast.makeText(this, "Инверсия - $inOut", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -269,7 +274,8 @@ class MainActivity : AppCompatActivity(){
                     arrayIsClickActionItem.forEachIndexed { index, value ->
                         if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
                                         index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)) ||
-                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion))) && value) {
+                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)))
+                                && value) {
                             val actionItem = groupAdapterAction.getItem(index) as ActionItem
                             arrayIsClickActionItem[index] = false
                             actionItem.isBtnClick = false
@@ -288,7 +294,8 @@ class MainActivity : AppCompatActivity(){
 
                     arrayIsClickActionItem.forEachIndexed { index, value ->
                         if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
-                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion))) && value) {
+                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)))
+                                && value) {
                             val _action = groupAdapterAction.getItem(index) as ActionItem
                             arrayIsClickActionItem[index] = false
                             _action.isBtnClick = false
@@ -316,7 +323,8 @@ class MainActivity : AppCompatActivity(){
 
                    arrayIsClickActionItem.forEachIndexed { index, value ->
                        if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
-                                       index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete))) && value) {
+                                       index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)))
+                                && value) {
                            val _action = groupAdapterAction.getItem(index) as ActionItem
                            arrayIsClickActionItem[index] = false
                            _action.isBtnClick = false
@@ -349,7 +357,8 @@ class MainActivity : AppCompatActivity(){
         return null
     }
 
-    private fun saveInFile(tools: MutableList<Tool?>, wires: MutableList<Wire>, fileName: String, isRewrite: Boolean = false) {
+    private fun saveInFile(tools: MutableList<Tool?>, wires: MutableList<Wire>, fileName: String,
+                            isRewrite: Boolean = false) {
         val name = if (!isRewrite) {
             val date = CurrentDate.getCurrentDate()
             "${fileName}_DATE_${date}"

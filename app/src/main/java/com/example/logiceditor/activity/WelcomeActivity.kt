@@ -65,7 +65,9 @@ class WelcomeActivity : AppCompatActivity() {
                     when(it.itemId) {
                         R.id.circuitElementRename -> {
                             val fileName = "${name}_DATE_${date}"
-                            createRenameAlertDialog(this, dir = applicationContext.filesDir.absolutePath, fileName = fileName).show()
+                            createRenameAlertDialog(this, dir =
+                                                                applicationContext.filesDir.absolutePath,
+                                                                fileName = fileName).show()
                             true
                         }
                         R.id.circuitElementDelete -> {
@@ -117,7 +119,8 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun updateActionBar() {
         this.supportActionBar!!.title = getString(R.string.app_name)
-        this.supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.background_circuit_color_round)))
+        this.supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.
+                                                                        getColor(R.color.background_circuit_color_round)))
     }
 
     fun updateRecyclerView() {

@@ -77,18 +77,23 @@ class Wire(var tools: Pair<Pair<Tool, Int>, Pair<Tool, Int>>): Serializable {
         }else {
             //5 линиий
             val (toolSecondTop, toolFirstBottom) = if (!isWrongOrder) {
-                tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2 to  tools.first.first.coordinates.second + tools.first.first.bitmap!!.height / 2
+                tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2 to
+                        tools.first.first.coordinates.second + tools.first.first.bitmap!!.height / 2
             }else {
-                tools.first.first.coordinates.second - tools.first.first.bitmap!!.height / 2 to tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2
+                tools.first.first.coordinates.second - tools.first.first.bitmap!!.height / 2 to
+                        tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2
             }
 
             val (toolSecondBotom, toolFirstTop) = if (!isWrongOrder) {
-                tools.second.first.coordinates.second + tools.second.first.bitmap!!.height / 2 to  tools.first.first.coordinates.second - tools.first.first.bitmap!!.height / 2
+                tools.second.first.coordinates.second + tools.second.first.bitmap!!.height / 2 to
+                        tools.first.first.coordinates.second - tools.first.first.bitmap!!.height / 2
             }else {
-                tools.first.first.coordinates.second + tools.first.first.bitmap!!.height / 2 to tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2
+                tools.first.first.coordinates.second + tools.first.first.bitmap!!.height / 2 to
+                        tools.second.first.coordinates.second - tools.second.first.bitmap!!.height / 2
             }
-            val toolSecondLeft = if (!isWrongOrder) tools.second.first.coordinates.first - tools.second.first.bitmap!!.width/2
-                                                else tools.first.first.coordinates.first - tools.first.first.bitmap!!.width/2
+            val toolSecondLeft = if (!isWrongOrder)
+                                    tools.second.first.coordinates.first - tools.second.first.bitmap!!.width/2
+                                    else tools.first.first.coordinates.first - tools.first.first.bitmap!!.width/2
 
             val endX1 = startLine.startX + 0.3*(abs(startLine.startX - startLine.endX))
             val line1 = Line(startLine.startX, startLine.startY, endX1.toFloat(), startLine.startY)

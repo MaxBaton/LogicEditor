@@ -112,9 +112,9 @@ class CurrentGame {
         val previousBottom = previous.coordinates.second + previous.bitmap!!.height/2
 
         val x = if ((previousRight) < (0.7*sketcherRightBottom!!.first)) (previous.coordinates.first + 100f) else
-                                                                                            (previous.coordinates.first - 100f)
+                                                                                (previous.coordinates.first - 100f)
         val y = if ((previousBottom) < (0.7*sketcherRightBottom!!.second)) (previous.coordinates.second + 100f) else
-                                                                                            (previous.coordinates.second - 100f)
+                                                                                (previous.coordinates.second - 100f)
 
         return x to y
     }
@@ -130,10 +130,13 @@ class CurrentGame {
                 val hitbox = it!!.checkHitBoxes(touchedX, touchedY)
                 if (hitbox != null) {
                     if ((firstToolCountWire.second != 0 && hitbox != 0) ||
-                            ((firstToolCountWire.first is LED || it is LED) && (firstToolCountWire.second != 0 || hitbox != 0)) ||
-                            ((firstToolCountWire.first is Button || it is Button) && (firstToolCountWire.second == 0 && hitbox == 0)
+                            ((firstToolCountWire.first is LED || it is LED) && (firstToolCountWire.second != 0
+                                    || hitbox != 0)) ||
+                            ((firstToolCountWire.first is Button || it is Button) && (firstToolCountWire.second == 0
+                                    && hitbox == 0)
                                     && (firstToolCountWire.first !is LED && it !is LED)) ||
-                            ((firstToolCountWire.first !is LED && it !is LED) && (firstToolCountWire.second == 0 && hitbox == 0)) ||
+                            ((firstToolCountWire.first !is LED && it !is LED) && (firstToolCountWire.second == 0
+                                    && hitbox == 0)) ||
                             (isWireContains(firstToolCountWire.first to firstToolCountWire.second, it to hitbox))) {
                         firstToolCountWire.first.isClickPort = false to -1
                         wireState.firstRectFound = false
@@ -264,7 +267,8 @@ class CurrentGame {
         savedWire.forEach {
             if ((it.tools.first.first == firstTool.first || it.tools.first.first == secondTool.first) ||
                  (it.tools.second.first == firstTool.first || it.tools.second.first == secondTool.first)) {
-                    val toolWire = if ((it.tools.first.first == firstTool.first || it.tools.first.first == secondTool.first) && it.tools.first.second != 0)
+                    val toolWire = if ((it.tools.first.first == firstTool.first || it.tools.first.first ==
+                                secondTool.first) && it.tools.first.second != 0)
                                     it.tools.first else it.tools.second
                     val tool = if (toolWire.first == firstTool.first) firstTool else secondTool
                     if ((toolWire.second == tool.second) && (toolWire.first == tool.first)) return true
@@ -282,7 +286,8 @@ class CurrentGame {
             val bottom = top + it.bitmap!!.height
 
 
-            if ((coordinates.first > left && coordinates.first < right) && (coordinates.second > top && coordinates.second < bottom)) {
+            if ((coordinates.first > left && coordinates.first < right) && (coordinates.second > top &&
+                        coordinates.second < bottom)) {
                 isToolSelected = true
                 return it
             }
@@ -304,7 +309,7 @@ class CurrentGame {
                 }else {
                     if (abs(coordinates.first - line.startX) < 15 &&
                             ((coordinates.second >= line.startY && coordinates.second <= line.endY) ||
-                             (coordinates.second <= line.startY && coordinates.second >= line.endY)       )) {
+                             (coordinates.second <= line.startY && coordinates.second >= line.endY) )) {
                                 isWireSelected = true
                                 return it
                     }
@@ -333,7 +338,8 @@ class CurrentGame {
         usedTools.forEach { tool ->
             if (tool !is LED) {
                 savedWire.forEach {
-                    if (((it.tools.first.first == tool && it.tools.first.second == 0) || (it.tools.second.first == tool && it.tools.second.second == 0)) &&
+                    if (((it.tools.first.first == tool && it.tools.first.second == 0) || (it.tools.second.first ==
+                                tool && it.tools.second.second == 0)) &&
                             duplicateTools.contains(tool)) {
                         outputs++
                         duplicateTools.remove(tool)
@@ -377,8 +383,10 @@ class CurrentGame {
                     val wire = savedWire[j]
                     if ((wire.tools.second.first !is LED) && (wire.tools.first.first !is LED)) {
                         if ((wire.tools.second.first == tool) || (wire.tools.first.first == tool)) {
-                            val (pairTool, _) = if (wire.tools.second.first == tool) wire.tools.first else wire.tools.second
-                            val (currentTool, countHitboxCurrent) = if (wire.tools.second.first == tool) wire.tools.second else wire.tools.first
+                            val (pairTool, _) = if (wire.tools.second.first == tool) wire.tools.first else
+                                                                                                    wire.tools.second
+                            val (currentTool, countHitboxCurrent) = if (wire.tools.second.first == tool)
+                                                                                wire.tools.second else wire.tools.first
                             if (pairTool.ioBoxes!![0]!!.second != null) {
                                 tool.ioBoxes!![countHitboxCurrent] =
                                         tool.ioBoxes!![countHitboxCurrent]!!.first to
@@ -399,8 +407,10 @@ class CurrentGame {
             }
         }
 
-        val led = if (savedWire[indexLED].tools.second.first is LED) (savedWire[indexLED].tools.second.first as LED) else (savedWire[indexLED].tools.first.first as LED)
-        val pairTool = if(savedWire[indexLED].tools.second.first == led) savedWire[indexLED].tools.first.first else savedWire[indexLED].tools.second.first
+        val led = if (savedWire[indexLED].tools.second.first is LED) (savedWire[indexLED].tools.second.first as LED)
+                else (savedWire[indexLED].tools.first.first as LED)
+        val pairTool = if(savedWire[indexLED].tools.second.first == led) savedWire[indexLED].tools.first.first else
+            savedWire[indexLED].tools.second.first
         led.ioBoxes!![0] = led.ioBoxes!![0]!!.first to pairTool.ioBoxes!![0]!!.second
         led.getResult(led.ioBoxes!![0]!!.second!!)
     }
@@ -459,14 +469,16 @@ class CurrentGame {
 
             savedWire.forEachIndexed  { index, it ->
                 if (wireLED != null) {
-                    if ((it.tools.second.first == tool) || (it.tools.first.first == tool) && (!set.contains(it.tools.first.first) && !set.contains(it.tools.second.first))) {
+                    if ((it.tools.second.first == tool) || (it.tools.first.first == tool) &&
+                        (!set.contains(it.tools.first.first) && !set.contains(it.tools.second.first))) {
                         set.add(tool!!)
 
                         if (tool!!.ioBoxes!!.size == 3) {
                             val set2 = getAdditionalList(tool!!)
                             set2.forEach { additionalSet.add(it) }
                         }else if (tool!!.ioBoxes!!.size == 2) {
-                            val pairTool = if (it.tools.second.first == tool) it.tools.first.first else it.tools.second.first
+                            val pairTool = if (it.tools.second.first == tool) it.tools.first.first else
+                                                                                            it.tools.second.first
 
                             if (pairTool.ioBoxes!!.size > 1) {
                                 if (additionalSet.isEmpty()) {

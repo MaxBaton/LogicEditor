@@ -52,7 +52,8 @@ fun AppCompatActivity.createSaveAlertDialog(mainActivity: MainActivity, isExit: 
         create()
     }
 
-private fun AppCompatActivity.createSameNameAlertDialog(mainActivity: MainActivity, name: String, saveDialog: AlertDialog, isExit: Boolean = false) =
+private fun AppCompatActivity.createSameNameAlertDialog(mainActivity: MainActivity, name: String,
+                                                        saveDialog: AlertDialog, isExit: Boolean = false) =
         with(AlertDialog.Builder(mainActivity)) {
             setTitle("Предупреждение!!!")
             setMessage("Файл с таким именем уже существует. Хотите перезаписать его?")
@@ -113,7 +114,8 @@ fun AppCompatActivity.createReferenceAlertDialog() =
 fun AppCompatActivity.createReferenceWelcomeActivityAlertDialog() =
         with(AlertDialog.Builder(this)) {
             setTitle("Справка")
-            val view = this@createReferenceWelcomeActivityAlertDialog.layoutInflater.inflate(R.layout.reference_welcome_activity,null)
+            val view = this@createReferenceWelcomeActivityAlertDialog.layoutInflater.inflate(R.layout.reference_welcome_activity,
+                                                                                                                        null)
             val textViewReference = view.findViewById<TextView>(R.id.textViewReferenceWelcomeActivity)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 textViewReference.justificationMode = Layout.JUSTIFICATION_MODE_INTER_WORD
@@ -148,7 +150,8 @@ fun AppCompatActivity.createRenameAlertDialog(welcomeActivity: WelcomeActivity, 
                     val newFile = File(dir, newFileName)
                     oldFile.renameTo(newFile)
                     welcomeActivity.updateRecyclerView()
-                    Toast.makeText(welcomeActivity, "Схема \"${fileName.substringBefore("_DATE_")}\" переименована в \"$name\"", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(welcomeActivity, "Схема \"${fileName.substringBefore("_DATE_")}\" " +
+                            "переименована в \"$name\"", Toast.LENGTH_SHORT).show()
                 }else {
                     Toast.makeText(welcomeActivity, "Введите корректное название!!!", Toast.LENGTH_SHORT).show()
                 }
@@ -167,7 +170,8 @@ fun AppCompatActivity.createConfirmDeleteCircuitAlertDialog(welcomeActivity: Wel
                 currentDialog.cancel()
                 welcomeActivity.deleteCircuit(fileName)
                 welcomeActivity.updateRecyclerView()
-                Toast.makeText(welcomeActivity, "Схема \"${fileName.substringBefore("_DATE_")}\" успешно удалена", Toast.LENGTH_SHORT).show()
+                Toast.makeText(welcomeActivity, "Схема \"${fileName.substringBefore("_DATE_")}\" " +
+                        "успешно удалена", Toast.LENGTH_SHORT).show()
             }
             setNegativeButton("Отмена") { currentDialog, _ ->
                 currentDialog.cancel()

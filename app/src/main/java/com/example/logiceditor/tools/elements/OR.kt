@@ -45,7 +45,8 @@ class OR(override var image: Int, override var coordinates: Pair<Float, Float> =
         ioBoxes!![2] = inputX to null
     }
 
-    override fun calculate(input1: Boolean, input2: Boolean) = if (!isInversion) (input1 or input2) else !(input1 or input2)
+    override fun calculate(input1: Boolean, input2: Boolean) = if (!isInversion) (input1 or input2) else
+                                                                                            !(input1 or input2)
 
     fun invert() {
         isInversion = !isInversion

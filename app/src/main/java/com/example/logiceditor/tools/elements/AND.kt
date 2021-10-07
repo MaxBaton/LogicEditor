@@ -4,8 +4,8 @@ import android.graphics.*
 import com.example.logiceditor.R
 import java.io.Serializable
 
-class AND(override var image: Int, override var coordinates: Pair<Float, Float> = 200f to 200f): Tool(image, coordinates),
-            LogicCalculation, Serializable{
+class AND(override var image: Int, override var coordinates: Pair<Float, Float> = 200f to 200f):
+        Tool(image, coordinates), LogicCalculation, Serializable{
     @Transient private var inputX: Rect? = null
     @Transient private  var inputY: Rect? = null
     @Transient private var output: Rect? = null
@@ -45,7 +45,8 @@ class AND(override var image: Int, override var coordinates: Pair<Float, Float> 
         ioBoxes!![2] = inputX to null
     }
 
-    override fun calculate(input1: Boolean, input2: Boolean) = if (!isInversion) (input1 and input2) else !(input1 and input2)
+    override fun calculate(input1: Boolean, input2: Boolean) = if (!isInversion)
+                                                                    (input1 and input2) else !(input1 and input2)
 
     fun invert() {
         isInversion = !isInversion
