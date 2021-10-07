@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Logic Editor</string>
+    <string name="app_name">Редактор логичесих схем</string>
     <string name="text_reference">\t\tНа данном эране представлено окно создания логической схемы.
     Слева предствален список элементов, доступных для использования. В верхней панели представлен список действий, доступных для исполнения.
     \n\t\tПри каждом нажатии на элемент происходит его поялвение на полотне для рисования.
@@ -19,4 +19,17 @@
     <string name="menu_reference">Reference</string>
     <string name="hint_name">Название</string>
     <string name="circuit_name">Название схемы</string>
+    <string name="AND_name">И</string>
+    <string name="OR_name">ИЛИ</string>
+    <string name="NOT_NAME">НЕ</string>
+    <string name="XOR_name">Исключающее ИЛИ</string>
+    <string name="Button_name">Кнопка</string>
+    <string name="LED_name">Лампочка</string>
+    <string name="str_in">вкл</string>
+    <string name="str_out">выкл</string>
+    <string name="new_circuit">Новая схема</string>
+    <string name="toast_turn_off_simulation">Сначала выключите симуляцию!!!</string>
+    <string name="toast_connect_all_outs">Соедините все выходы!!!</string>
+    <string name="wrong_count_connections">Неверное количество соединений!!!</string>
+    <string name="toast_LED_needed">Должна быть одна лампочка!!!</string>
 </resources>

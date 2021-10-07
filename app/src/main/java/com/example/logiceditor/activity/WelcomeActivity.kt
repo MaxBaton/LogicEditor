@@ -116,7 +116,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
     private fun updateActionBar() {
-        this.supportActionBar!!.title = "Редактор логичесих схем"
+        this.supportActionBar!!.title = getString(R.string.app_name)
         this.supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.background_circuit_color_round)))
     }
 
@@ -131,11 +131,11 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun fillWithDataRecyclerView() {
-        groupAdapterCircuit.add(CircuitItem(R.drawable.new_circuit_icon, "Новая схема", "", 0))
+        groupAdapterCircuit.add(CircuitItem(R.drawable.new_circuit_icon, getString(R.string.new_circuit), "", 0))
 
         listNameCircuit.forEachIndexed { index, nameCircuit ->
-            val name = nameCircuit.substringBefore("_DATE_")
-            val date = nameCircuit.substringAfter("_DATE_").replace("-","/")
+            val name = nameCircuit.substringBefore(MainActivity.DATE_DELIMITER)
+            val date = nameCircuit.substringAfter(MainActivity.DATE_DELIMITER).replace("-","/")
             groupAdapterCircuit.add(CircuitItem(R.drawable.circuit_icon, name, date, index + 1))
         }
     }

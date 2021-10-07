@@ -20,7 +20,6 @@ import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import java.io.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity(){
@@ -33,6 +32,7 @@ class MainActivity : AppCompatActivity(){
     companion object{
         lateinit var _resources: Resources
         var nameDate = "" to ""
+        const val DATE_DELIMITER = "_DATE_"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,11 +99,11 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-    private fun isLoadCircuit(name: String, date: String) = !(name == "Новая схема" && date == "")
+    private fun isLoadCircuit(name: String, date: String) = !(name == getString(R.string.new_circuit) && date == "")
 
     private fun clickElement(element: ElementItem) {
         if (arrayIsClickActionItem[ListsRecyclerView.listIconAction.indexOf(R.drawable.start)]) {
-            Toast.makeText(this, "Сначала выключите симуляцию!!!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_turn_off_simulation), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -122,32 +122,32 @@ class MainActivity : AppCompatActivity(){
         binding.sketcherView.game.isDelete = false
 
         when (element.name) {
-            "И" -> {
+            getString(R.string.AND_name) -> {
                 binding.sketcherView.game.addAND(R.drawable.and_element)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
             }
-            "ИЛИ" -> {
+            getString(R.string.OR_name) -> {
                 binding.sketcherView.game.addOR(R.drawable.or_element)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
             }
-            "НЕ" -> {
+            getString(R.string.NOT_NAME) -> {
                 binding.sketcherView.game.addNOT(R.drawable.not_elemet)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
             }
-            "Исключающее ИЛИ" -> {
+            getString(R.string.XOR_name) -> {
                 binding.sketcherView.game.addXOR(R.drawable.xor_element)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
             }
-            "Кнопка" -> {
+            getString(R.string.Button_name) -> {
                 binding.sketcherView.game.addButton(R.drawable.button_off_element)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
             }
-            "Лампочка" -> {
+            getString(R.string.LED_name) -> {
                 binding.sketcherView.game.addLED(R.drawable.light_element)
                 binding.sketcherView.drawingThread.run()
                 binding.sketcherView.enableDrawing()
@@ -159,20 +159,21 @@ class MainActivity : AppCompatActivity(){
         when(action.icon) {
             R.drawable.wire -> {
                 val indexWire = ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)
-                val inOut = if (arrayIsClickActionItem[indexWire]) "вкл" else "выкл"
+                val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else
+                                                                                                getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else binding.sketcherView.enableDrawing()
                 Toast.makeText(this, "Соединение - ${inOut}", Toast.LENGTH_SHORT).show()
                 true
             }
             R.drawable.start -> {
                 if (!binding.sketcherView.game.checkOutputs()) {
-                    Toast.makeText(this@MainActivity, "Соедините все выходы!!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_connect_all_outs), Toast.LENGTH_SHORT).show()
                     false
                 } else if (!binding.sketcherView.game.checkConnections()) {
-                    Toast.makeText(this@MainActivity, "Неверное количество соединений!!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.wrong_count_connections), Toast.LENGTH_SHORT).show()
                     false
                 }else if (!binding.sketcherView.game.isLEDOne()) {
-                    Toast.makeText(this@MainActivity, "Должна быть одна лампочка!!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, getString(R.string.toast_LED_needed), Toast.LENGTH_SHORT).show()
                     false
                 }else {
                     if (!binding.sketcherView.game.isSimulate) {
@@ -190,7 +191,7 @@ class MainActivity : AppCompatActivity(){
             }
             R.drawable.delete -> {
                 val indexDelete = ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)
-                val inOut = if (arrayIsClickActionItem[indexDelete]) "вкл" else "выкл"
+                val inOut = if (arrayIsClickActionItem[indexDelete]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexDelete]) {
                     binding.sketcherView.enableDeleting()
                 } else {
@@ -227,7 +228,7 @@ class MainActivity : AppCompatActivity(){
             }
             R.drawable.inversion -> {
                 val indexInversion = ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)
-                val inOut = if (arrayIsClickActionItem[indexInversion]) "вкл" else "выкл"
+                val inOut = if (arrayIsClickActionItem[indexInversion]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexInversion]) binding.sketcherView.enableInversion() else binding.sketcherView.enableDrawing()
                 Toast.makeText(this, "Инверсия - $inOut", Toast.LENGTH_SHORT).show()
                 true
@@ -256,7 +257,7 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Сначала выкл симуляцию", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
                 }
             }
             R.drawable.start -> {
@@ -295,14 +296,14 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Сначала выкл симуляцию", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
                 }
             }
            R.drawable.save -> {
                if (!arrayIsClickActionItem[indexStart]){
                    clickAction(action)
                }else {
-                   Toast.makeText(this, "Сначала выкл симуляцию", Toast.LENGTH_SHORT).show()
+                   Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
                }
            }
            R.drawable.inversion -> {
@@ -323,7 +324,7 @@ class MainActivity : AppCompatActivity(){
                        }
                    }
                }else {
-                   Toast.makeText(this, "Сначала выкл симуляцию", Toast.LENGTH_SHORT).show()
+                   Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
                }
            }
            R.drawable.reference -> clickAction(action)
@@ -340,7 +341,7 @@ class MainActivity : AppCompatActivity(){
 
     fun isExistNameCircuit(name: String): String? {
         getNamesCircuit()!!.forEach {
-            val _name = it.substringBefore("_DATE_")
+            val _name = it.substringBefore(DATE_DELIMITER)
             val date = it.substringAfter(name)
             if (name == _name) return "${name}${date}"
         }
@@ -375,7 +376,7 @@ class MainActivity : AppCompatActivity(){
         val dir = applicationContext.filesDir.absolutePath
         val sourceFile = File(dir,fileName)
 
-        val name = fileName.substringBefore("_DATE_")
+        val name = fileName.substringBefore(DATE_DELIMITER)
         val date = CurrentDate.getCurrentDate()//getCurrentDate()
         val newFileName = "${name}_DATE_${date}"
 
