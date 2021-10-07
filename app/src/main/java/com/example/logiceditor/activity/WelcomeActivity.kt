@@ -1,24 +1,19 @@
 package com.example.logiceditor.activity
 
 import android.content.Intent
-import android.graphics.ColorSpace
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.WindowManager
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.logiceditor.R
 import com.example.logiceditor.databinding.ActivityWelcomeBinding
+import com.example.logiceditor.databinding.CircuitElementBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.circuit_element.view.*
-import kotlinx.android.synthetic.main.logic_element.view.*
 import java.io.File
 
 class WelcomeActivity : AppCompatActivity() {
@@ -149,8 +144,8 @@ class WelcomeActivity : AppCompatActivity() {
 
     fun deleteCircuit(fileName: String) {
         val dir = applicationContext.filesDir.absolutePath
-        val sourcefile = File(dir,fileName)
-        sourcefile.delete()
+        val sourceFile = File(dir,fileName)
+        sourceFile.delete()
     }
 
     inner class CircuitItem(private val image: Int, val name: String, val date: String, var index: Int): Item<GroupieViewHolder>()  {
@@ -158,13 +153,15 @@ class WelcomeActivity : AppCompatActivity() {
         override fun getLayout() = R.layout.circuit_element
 
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+            val _binding = CircuitElementBinding.bind(viewHolder.itemView)
+
             Glide
                 .with(this@WelcomeActivity)
                 .load(image)
-                .into(viewHolder.itemView.imageViewLoadElement)
+                .into(_binding.imageViewLoadElement)
 
-            viewHolder.itemView.textViewNameCircuit2.text = name
-            viewHolder.itemView.textViewDateCircuit2.text = date
+            _binding.textViewNameCircuit2.text = name
+            _binding.textViewDateCircuit2.text = date
         }
     }
 }

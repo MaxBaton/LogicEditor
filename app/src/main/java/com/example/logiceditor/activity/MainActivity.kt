@@ -11,16 +11,14 @@ import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.example.logiceditor.R
+import com.example.logiceditor.databinding.ActionElementBinding
 import com.example.logiceditor.databinding.ActivityMainBinding
+import com.example.logiceditor.databinding.LogicElementBinding
 import com.example.logiceditor.tools.elements.Tool
 import com.example.logiceditor.tools.wire.Wire
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
-import kotlinx.android.synthetic.main.action_element.view.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.logic_element.view.*
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -334,7 +332,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun saveCircuit(name: String, isRewrite: Boolean = false) {
-        //save circuit in android file system
+        // save circuit in android file system
         val tools = binding.sketcherView.game.usedTools
         val wires = binding.sketcherView.game.savedWire
         saveInFile(tools, wires, name, isRewrite)
@@ -352,7 +350,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun saveInFile(tools: MutableList<Tool?>, wires: MutableList<Wire>, fileName: String, isRewrite: Boolean = false) {
         val name = if (!isRewrite) {
-            val date = CurrentDate.getCurrentDate()//getCurrentDate()
+            val date = CurrentDate.getCurrentDate()
             "${fileName}_DATE_${date}"
         }else {
             fileName
@@ -365,7 +363,7 @@ class MainActivity : AppCompatActivity(){
 
 
         if (isRewrite) {
-            //change date of file
+            // change date of file
             renameFile(fileName)
         }
 
@@ -395,7 +393,7 @@ class MainActivity : AppCompatActivity(){
     private fun getNamesCircuit() = applicationContext.filesDir.list()
 
     fun loadCircuit(fileName: String) {
-        //load circuit
+        // load circuit
         val fis = applicationContext.openFileInput(fileName)
         val inputStream = ObjectInputStream(fis)
         val tools = inputStream.readObject()!! as MutableList<Tool?>
@@ -415,34 +413,38 @@ class MainActivity : AppCompatActivity(){
         override fun getLayout() = R.layout.logic_element
 
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
-            viewHolder.itemView.textViewNameElement.text = name
+            val _binding = LogicElementBinding.bind(viewHolder.itemView)
+
+            _binding.textViewNameElement.text = name
 
             Glide
                 .with(this@MainActivity).asBitmap()
                 .load(icon)
-                .into(viewHolder.itemView.imageViewElement)
+                .into(_binding.imageViewElement)
         }
     }
 
-    inner class ActionItem(var icon: Int/*var name: String*/, val index: Int, var isBtnClick: Boolean = false): Item<GroupieViewHolder>() {
+    inner class ActionItem(var icon: Int, val index: Int, var isBtnClick: Boolean = false): Item<GroupieViewHolder>() {
 
         override fun getLayout() = R.layout.action_element
 
         override fun bind(viewHolder: GroupieViewHolder, position: Int) {
+            val _binding = ActionElementBinding.bind(viewHolder.itemView)
+
             if (isBtnClick && (index <= ListsRecyclerView.listIconActionClick.size)) {
                 val clickIcon = ListsRecyclerView.listIconActionClick[index]
 
                 Glide
                         .with(this@MainActivity)
                         .load(clickIcon)
-                        .into(viewHolder.itemView.imageViewAction)
+                        .into(_binding.imageViewAction)
             }else {
                 val startIcon = ListsRecyclerView.listIconAction[index]
 
                 Glide
                         .with(this@MainActivity)
                         .load(startIcon)
-                        .into(viewHolder.itemView.imageViewAction)
+                        .into(_binding.imageViewAction)
             }
         }
     }
