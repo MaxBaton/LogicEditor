@@ -3,6 +3,7 @@ package com.example.logiceditor.game
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.MotionEvent
+import com.example.logiceditor.sketcher.Sketcher
 import com.example.logiceditor.tools.elements.Tool
 import com.example.logiceditor.tools.elements.*
 import com.example.logiceditor.tools.wire.Wire

@@ -3,9 +3,11 @@ package com.example.logiceditor.sketcher
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
+import androidx.core.view.drawToBitmap
 import com.example.logiceditor.game.CurrentGame
 import com.example.logiceditor.tools.wire.WireState
 
@@ -15,8 +17,10 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
     private var wiringEnabled = false
     private var deleteEnabled = false
     private var inversionEnabled = false
+    private var movingEnabled = false
     private var wireState: WireState = WireState()
     lateinit var drawingThread: SurfaceDrawingThread
+    private val gestureDetector = GestureDetector(context, MyGestureListener())
 
     init {
         holder.addCallback(this)
@@ -69,6 +73,12 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
                 drawingThread.run()
             }
         }
+        if (movingEnabled) {
+            //if (event.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
+                gestureDetector.onTouchEvent(event)
+//                return true
+            //}
+        }
         return true
     }
 
@@ -76,6 +86,7 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         disableWiring()
         disableDeleting()
         disableInversion()
+        disableMoving()
         drawingEnabled = true
     }
 
@@ -83,6 +94,7 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         disableDrawing()
         disableDeleting()
         disableInversion()
+        disableMoving()
         wiringEnabled = true
     }
 
@@ -90,6 +102,7 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         disableDrawing()
         disableWiring()
         disableInversion()
+        disableMoving()
         deleteEnabled = true
     }
 
@@ -97,7 +110,16 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         disableDrawing()
         disableWiring()
         disableDeleting()
+        disableMoving()
         inversionEnabled = true
+    }
+
+    fun enableMoving() {
+        disableDrawing()
+        disableWiring()
+        disableDeleting()
+        disableInversion()
+        movingEnabled = true
     }
 
     private fun disableDrawing() {
@@ -114,5 +136,18 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
 
     private fun disableInversion() {
         inversionEnabled = false
+    }
+
+    private fun disableMoving() {
+        movingEnabled = false
+    }
+
+    private inner class MyGestureListener: GestureDetector.SimpleOnGestureListener() {
+        override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
+            drawingThread.scrollCoordinates = distanceX to distanceY
+            scrollBy(distanceX.toInt(), distanceY.toInt())
+            drawingThread.run()
+            return true
+        }
     }
 }

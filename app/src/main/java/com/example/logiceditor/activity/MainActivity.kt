@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity(){
     private fun clickAction(action: ActionItem) =
         when(action.icon) {
             R.drawable.wire -> {
-                val indexWire = ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)
+                val indexWire = action.index
                 val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else
                                                                                     binding.sketcherView.enableDrawing()
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity(){
                 }
             }
             R.drawable.delete -> {
-                val indexDelete = ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)
+                val indexDelete = action.index
                 val inOut = if (arrayIsClickActionItem[indexDelete]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexDelete]) {
                     binding.sketcherView.enableDeleting()
@@ -231,11 +231,19 @@ class MainActivity : AppCompatActivity(){
                 true
             }
             R.drawable.inversion -> {
-                val indexInversion = ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)
+                val indexInversion = action.index
                 val inOut = if (arrayIsClickActionItem[indexInversion]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexInversion]) binding.sketcherView.enableInversion() else
                                                                             binding.sketcherView.enableDrawing()
                 Toast.makeText(this, "Инверсия - $inOut", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.drawable.move -> {
+                val indexMoving = action.index
+                val inOut = if (arrayIsClickActionItem[indexMoving]) getString(R.string.str_in) else getString(R.string.str_out)
+                if (arrayIsClickActionItem[indexMoving]) binding.sketcherView.enableMoving() else
+                    binding.sketcherView.enableDrawing()
+                toastShort("Перемещение - $inOut")
                 true
             }
             else -> false
@@ -254,7 +262,7 @@ class MainActivity : AppCompatActivity(){
                     clickAction(action)
 
                     arrayIsClickActionItem.forEachIndexed { index, value ->
-                        if (value && (index != action.index)) {
+                        if (index != indexWire && value) {
                             val _action = groupAdapterAction.getItem(index) as ActionItem
                             arrayIsClickActionItem[index] = false
                             _action.isBtnClick = false
@@ -272,10 +280,7 @@ class MainActivity : AppCompatActivity(){
                     groupAdapterAction.notifyItemChanged(indexStart)
 
                     arrayIsClickActionItem.forEachIndexed { index, value ->
-                        if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
-                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)) ||
-                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)))
-                                && value) {
+                        if (index != indexStart && value) {
                             val actionItem = groupAdapterAction.getItem(index) as ActionItem
                             arrayIsClickActionItem[index] = false
                             actionItem.isBtnClick = false
@@ -293,9 +298,7 @@ class MainActivity : AppCompatActivity(){
                     clickAction(action)
 
                     arrayIsClickActionItem.forEachIndexed { index, value ->
-                        if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
-                                        index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.inversion)))
-                                && value) {
+                        if (index != indexDelete && value) {
                             val _action = groupAdapterAction.getItem(index) as ActionItem
                             arrayIsClickActionItem[index] = false
                             _action.isBtnClick = false
@@ -322,9 +325,7 @@ class MainActivity : AppCompatActivity(){
                    clickAction(action)
 
                    arrayIsClickActionItem.forEachIndexed { index, value ->
-                       if ((index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.wire)) ||
-                                       index == (ListsRecyclerView.listIconAction.indexOf(R.drawable.delete)))
-                                && value) {
+                       if (index != indexInversion && value) {
                            val _action = groupAdapterAction.getItem(index) as ActionItem
                            arrayIsClickActionItem[index] = false
                            _action.isBtnClick = false
@@ -335,8 +336,28 @@ class MainActivity : AppCompatActivity(){
                    Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
                }
            }
-           R.drawable.reference -> clickAction(action)
-           R.drawable.exit -> clickAction(action)
+            R.drawable.move -> {
+                if (!arrayIsClickActionItem[indexStart]) {
+                    val indexMoving = ListsRecyclerView.listIconAction.indexOf(R.drawable.move)
+                    arrayIsClickActionItem[indexMoving] = !arrayIsClickActionItem[indexMoving]
+                    action.isBtnClick = arrayIsClickActionItem[indexMoving]
+                    groupAdapterAction.notifyItemChanged(action.index)
+                    clickAction(action)
+
+                    arrayIsClickActionItem.forEachIndexed { index, value ->
+                        if (index != indexMoving && value) {
+                            val _action = groupAdapterAction.getItem(index) as ActionItem
+                            arrayIsClickActionItem[index] = false
+                            _action.isBtnClick = false
+                            groupAdapterAction.notifyItemChanged(index)
+                        }
+                    }
+                }else {
+                    toastShort(getString(R.string.toast_turn_off_simulation))
+                }
+            }
+            R.drawable.reference -> clickAction(action)
+            R.drawable.exit -> clickAction(action)
         }
     }
 

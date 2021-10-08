@@ -9,6 +9,7 @@ class SurfaceDrawingThread(private val surfaceHolder: SurfaceHolder): Thread() {
 
     private var mBackgroundPaint: Paint? = null
     var game: CurrentGame? = null
+    var scrollCoordinates = 0f to 0f
 
     init {
         mBackgroundPaint = Paint()
@@ -21,9 +22,16 @@ class SurfaceDrawingThread(private val surfaceHolder: SurfaceHolder): Thread() {
         val height = canvas.height
         canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), mBackgroundPaint!!)
         if (game != null) {
+            if (scrollCoordinates.first != 0f || scrollCoordinates.second != 0f) {
+                game!!.usedTools.forEach {
+                    it!!.coordinates = (it.coordinates.first - scrollCoordinates.first) to
+                            (it.coordinates.second - scrollCoordinates.second)
+                }
+            }
             game!!.draw(canvas)
         }
 
         surfaceHolder.unlockCanvasAndPost(canvas)
+        scrollCoordinates = 0f to 0f
     }
 }

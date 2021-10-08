@@ -10,8 +10,8 @@ object ListsRecyclerView {
                                     R.drawable.light_recycler_view)
     // Actions
     val listIconAction = listOf(R.drawable.wire, R.drawable.start, R.drawable.delete, R.drawable.inversion,
-                                    R.drawable.save, R.drawable.reference, R.drawable.exit)
+                                    R.drawable.move, R.drawable.save, R.drawable.reference, R.drawable.exit)
 
     val listIconActionClick = listOf(R.drawable.wire_click, R.drawable.stop, R.drawable.delete_click,
-                                        R.drawable.inversion_click)
+                                        R.drawable.inversion_click, R.drawable.move_click)
 }
