@@ -4,8 +4,11 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.logiceditor.R
@@ -118,9 +121,11 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
     private fun updateActionBar() {
-        this.supportActionBar!!.title = getString(R.string.app_name)
-        this.supportActionBar!!.setBackgroundDrawable(ColorDrawable(resources.
-                                                                        getColor(R.color.background_circuit_color_round)))
+        this.supportActionBar!!.title = HtmlCompat.fromHtml("<font color=\"#eff4f8\">"
+                                                                    + getString(R.string.app_name)
+                                                                    + "</font>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+        this.supportActionBar!!.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this,
+                                                                            R.color.background_circuit_color_round)))
     }
 
     fun updateRecyclerView() {
