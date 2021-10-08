@@ -2,11 +2,10 @@ package com.example.logiceditor.activity
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.GridLayoutManager
@@ -67,14 +66,14 @@ class WelcomeActivity : AppCompatActivity() {
                 popupMenu.setOnMenuItemClickListener {
                     when(it.itemId) {
                         R.id.circuitElementRename -> {
-                            val fileName = "${name}_DATE_${date}"
+                            val fileName = "${name}${MainActivity.DATE_DELIMITER}${date}"
                             createRenameAlertDialog(this, dir =
                                                                 applicationContext.filesDir.absolutePath,
                                                                 fileName = fileName).show()
                             true
                         }
                         R.id.circuitElementDelete -> {
-                            val fileName = "${name}_DATE_${date}"
+                            val fileName = "${name}${MainActivity.DATE_DELIMITER}${date}"
                             createConfirmDeleteCircuitAlertDialog(this, fileName).show()
                             true
                         }

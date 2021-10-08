@@ -7,7 +7,6 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.SurfaceView
-import androidx.core.view.drawToBitmap
 import com.example.logiceditor.game.CurrentGame
 import com.example.logiceditor.tools.wire.WireState
 

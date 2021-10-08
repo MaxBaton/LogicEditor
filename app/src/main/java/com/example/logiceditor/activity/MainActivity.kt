@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity(){
         val nameCircuit = intent.getStringExtra(WelcomeActivity.NAME_CIRCUIT)
         val dateCircuit = intent.getStringExtra(WelcomeActivity.DATE_CIRCUIT)
         if (isLoadCircuit(nameCircuit!!, dateCircuit!!)) {
-            val fileName = "${nameCircuit}_DATE_${dateCircuit}"
+            val fileName = "${nameCircuit}$DATE_DELIMITER${dateCircuit}"
             loadCircuit(fileName)
             nameDate = nameCircuit to dateCircuit
             toolWireCount = binding.sketcherView.game.usedTools.size to binding.sketcherView.game.savedWire.size
@@ -163,7 +162,7 @@ class MainActivity : AppCompatActivity(){
                 val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else
                                                                                     binding.sketcherView.enableDrawing()
-                toastShort("Соединение - ${inOut}")
+                toastShort("Соединение - $inOut")
                 true
             }
             R.drawable.start -> {
@@ -382,7 +381,7 @@ class MainActivity : AppCompatActivity(){
                             isRewrite: Boolean = false) {
         val name = if (!isRewrite) {
             val date = CurrentDate.getCurrentDate()
-            "${fileName}_DATE_${date}"
+            "${fileName}$DATE_DELIMITER${date}"
         }else {
             fileName
         }
@@ -407,8 +406,8 @@ class MainActivity : AppCompatActivity(){
         val sourceFile = File(dir,fileName)
 
         val name = fileName.substringBefore(DATE_DELIMITER)
-        val date = CurrentDate.getCurrentDate()//getCurrentDate()
-        val newFileName = "${name}_DATE_${date}"
+        val date = CurrentDate.getCurrentDate()
+        val newFileName = "${name}$DATE_DELIMITER${date}"
 
         val destFile= File(dir,newFileName)
         sourceFile.renameTo(destFile)

@@ -3,13 +3,10 @@ package com.example.logiceditor.game
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.MotionEvent
-import com.example.logiceditor.sketcher.Sketcher
-import com.example.logiceditor.tools.elements.Tool
 import com.example.logiceditor.tools.elements.*
 import com.example.logiceditor.tools.wire.Wire
 import com.example.logiceditor.tools.wire.WireState
 import java.util.*
-import kotlin.collections.LinkedHashSet
 import kotlin.math.abs
 
 class CurrentGame {
@@ -144,9 +141,7 @@ class CurrentGame {
                         return wireState
                     }
 
-                    val countHitbox = hitbox
-
-                    savedWire.add(Wire((firstToolCountWire to (it to countHitbox))))
+                    savedWire.add(Wire((firstToolCountWire to (it to hitbox))))
 
                     //second wire found
                     wireState.secondRectFound = true
