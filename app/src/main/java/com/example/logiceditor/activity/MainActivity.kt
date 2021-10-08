@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity(){
 
     private fun clickElement(element: ElementItem) {
         if (arrayIsClickActionItem[ListsRecyclerView.listIconAction.indexOf(R.drawable.start)]) {
-            Toast.makeText(this, getString(R.string.toast_turn_off_simulation), Toast.LENGTH_SHORT).show()
+            toastShort(getString(R.string.toast_turn_off_simulation))
             return
         }
 
@@ -163,18 +163,18 @@ class MainActivity : AppCompatActivity(){
                 val inOut = if (arrayIsClickActionItem[indexWire]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexWire]) binding.sketcherView.enableWiring() else
                                                                                     binding.sketcherView.enableDrawing()
-                Toast.makeText(this, "Соединение - ${inOut}", Toast.LENGTH_SHORT).show()
+                toastShort("Соединение - ${inOut}")
                 true
             }
             R.drawable.start -> {
                 if (!binding.sketcherView.game.checkOutputs()) {
-                    Toast.makeText(this@MainActivity, getString(R.string.toast_connect_all_outs), Toast.LENGTH_SHORT).show()
+                    toastShort(getString(R.string.toast_connect_all_outs))
                     false
                 } else if (!binding.sketcherView.game.checkConnections()) {
-                    Toast.makeText(this@MainActivity, getString(R.string.wrong_count_connections), Toast.LENGTH_SHORT).show()
+                    toastShort(getString(R.string.wrong_count_connections))
                     false
                 }else if (!binding.sketcherView.game.isLEDOne()) {
-                    Toast.makeText(this@MainActivity, getString(R.string.toast_LED_needed), Toast.LENGTH_SHORT).show()
+                    toastShort(getString(R.string.toast_LED_needed))
                     false
                 }else {
                     if (!binding.sketcherView.game.isSimulate) {
@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity(){
                 } else {
                     binding.sketcherView.enableDrawing()
                 }
-                Toast.makeText(this, "Удаление - $inOut", Toast.LENGTH_SHORT).show()
+                toastShort("Удаление - $inOut")
                 true
             }
             R.drawable.save -> {
@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity(){
                 val inOut = if (arrayIsClickActionItem[indexInversion]) getString(R.string.str_in) else getString(R.string.str_out)
                 if (arrayIsClickActionItem[indexInversion]) binding.sketcherView.enableInversion() else
                                                                             binding.sketcherView.enableDrawing()
-                Toast.makeText(this, "Инверсия - $inOut", Toast.LENGTH_SHORT).show()
+                toastShort("Инверсия - $inOut")
                 true
             }
             R.drawable.move -> {
@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 } else {
-                    Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
+                    toastShort(getString(R.string.toast_turn_off_simulation))
                 }
             }
             R.drawable.start -> {
@@ -306,14 +306,14 @@ class MainActivity : AppCompatActivity(){
                         }
                     }
                 } else {
-                    Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
+                    toastShort(getString(R.string.toast_turn_off_simulation))
                 }
             }
            R.drawable.save -> {
                if (!arrayIsClickActionItem[indexStart]){
                    clickAction(action)
                }else {
-                   Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
+                   toastShort(getString(R.string.toast_turn_off_simulation))
                }
            }
            R.drawable.inversion -> {
@@ -333,7 +333,7 @@ class MainActivity : AppCompatActivity(){
                        }
                    }
                }else {
-                   Toast.makeText(this, R.string.toast_turn_off_simulation, Toast.LENGTH_SHORT).show()
+                   toastShort(getString(R.string.toast_turn_off_simulation))
                }
            }
             R.drawable.move -> {
