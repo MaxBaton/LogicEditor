@@ -73,10 +73,8 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
             }
         }
         if (movingEnabled) {
-            //if (event.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
-                gestureDetector.onTouchEvent(event)
-//                return true
-            //}
+            gestureDetector.onTouchEvent(event)
+            drawingThread.run()
         }
         return true
     }
@@ -145,7 +143,6 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
             drawingThread.scrollCoordinates = distanceX to distanceY
             scrollBy(distanceX.toInt(), distanceY.toInt())
-            drawingThread.run()
             return true
         }
     }
