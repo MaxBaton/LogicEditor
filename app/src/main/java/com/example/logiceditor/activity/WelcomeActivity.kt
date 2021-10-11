@@ -27,6 +27,8 @@ class WelcomeActivity : AppCompatActivity() {
         const val NAME_CIRCUIT = "nameCircuit"
         const val DATE_CIRCUIT = "dateCircuit"
         var isChangeListCircuit = false
+        private const val SPAN_COUNT = 3
+        private const val SPACE_IN_PIXEL = 3
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,9 +42,9 @@ class WelcomeActivity : AppCompatActivity() {
             setContentView(root)
 
             recyclerViewCircuit.apply {
-                layoutManager = GridLayoutManager(this@WelcomeActivity, 3)
+                layoutManager = GridLayoutManager(this@WelcomeActivity, SPAN_COUNT)
                 adapter = groupAdapterCircuit
-                addItemDecoration(RecyclerViewCircuitItemDecoration(3))
+                addItemDecoration(RecyclerViewCircuitItemDecoration(SPACE_IN_PIXEL))
             }
         }
 

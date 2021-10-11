@@ -25,6 +25,10 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         holder.addCallback(this)
     }
 
+    companion object {
+        private const val LOG_PAINT = "PaintException"
+    }
+
     override fun surfaceCreated(holder: SurfaceHolder) {
         game.sketcherRightBottom = this.right.toFloat() to this.bottom.toFloat()
 
@@ -36,7 +40,7 @@ class Sketcher(context: Context, atrs: AttributeSet): SurfaceView(context, atrs)
         try {
             drawingThread.join()
         }catch (e: InterruptedException) {
-            Log.d("PaintException", e.toString())
+            Log.d(LOG_PAINT, e.toString())
         }
     }
 
