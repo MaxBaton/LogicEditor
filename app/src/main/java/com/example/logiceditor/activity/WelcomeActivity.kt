@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -170,7 +171,11 @@ class WelcomeActivity : AppCompatActivity() {
                 .into(_binding.imageViewLoadElement)
 
             _binding.textViewNameCircuit2.text = name
-            _binding.textViewDateCircuit2.text = date
+            if(date.trim().isEmpty()) {
+                _binding.textViewDateCircuit2.visibility = View.GONE
+            }else {
+                _binding.textViewDateCircuit2.text = date
+            }
         }
     }
 }

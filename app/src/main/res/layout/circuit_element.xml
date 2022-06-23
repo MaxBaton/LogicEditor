@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="7dp"
-    android:id="@+id/circuitElement">
+    android:id="@+id/circuitElement"
+    android:backgroundTint="@android:color/transparent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,13 +16,15 @@
 
         <ImageView
             android:id="@+id/imageViewLoadElement"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.83"
+            app:layout_constraintWidth_percent="0.33"
             android:adjustViewBounds="true"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,24 +39,23 @@
             android:gravity="center_vertical |center_horizontal"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="5dp"
             app:layout_constraintStart_toEndOf="@+id/imageViewLoadElement"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/textViewDateCircuit2"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/imageViewLoadElement"/>
 
         <TextView
             android:id="@+id/textViewDateCircuit2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
             android:textColor="@color/text_color_recycler_view_elements"
             tools:text="21/05/2021 15:57:37"
             android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@+id/imageViewLoadElement"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textViewNameCircuit2"
+            app:layout_constraintEnd_toEndOf="@id/textViewNameCircuit2"
             app:layout_constraintBottom_toBottomOf="@id/imageViewLoadElement"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
